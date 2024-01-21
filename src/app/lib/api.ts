@@ -1,5 +1,14 @@
 import { Trip } from "@/app/page";
 
+export const getTrips = async ({
+  page = 1,
+}: {
+  page?: number;
+}): Promise<Trip[]> => {
+  const response = await fetch(`http://localhost:8000/trips?_page=${page}`);
+  return await response.json();
+};
+
 export const getTripDetails = async (id: string): Promise<Trip> => {
   const response = await fetch(`http://localhost:8000/trips/${id}`);
   const data = await response.json();

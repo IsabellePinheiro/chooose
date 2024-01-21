@@ -1,6 +1,9 @@
-import { getTrips } from "@/app/api/trips";
-import { TripCard } from "@/components/TripCard";
-import { Flex, SimpleGrid } from "@chakra-ui/react";
+import { getTripsAction } from "@/app/action";
+import { TripCard } from "@/app/components/trip-card";
+import TripList from "@/app/components/trip-list";
+import Loading from "@/app/trips/[trip_id]/loading";
+import { SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Suspense } from "react";
 
 export interface Trip {
   id: number;
@@ -21,16 +24,9 @@ export interface Trip {
 }
 
 export default async function Home() {
-  const response = await getTrips();
+  const page = 1;
+  const res = fetch("api");
+  const initialTrips = await getTripsAction({ page });
 
-  return (
-    <SimpleGrid
-      spacing={8}
-      templateColumns="repeat(auto-fill, minmax(440px, 1fr))"
-    >
-      {response.map((trip: Trip) => (
-        <TripCard key={trip.id} trip={trip} />
-      ))}
-    </SimpleGrid>
-  );
+  return <TripList initialTrips={initialTrips} />;
 }

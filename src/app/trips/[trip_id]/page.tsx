@@ -1,4 +1,4 @@
-import { getTripDetails } from "@/app/api/trips/[trip_id]";
+import { getTripDetails } from "@/app/lib/api";
 import { AdvantageDetail } from "@/app/trips/[trip_id]/components/advantage-detail";
 import {
   Divider,
