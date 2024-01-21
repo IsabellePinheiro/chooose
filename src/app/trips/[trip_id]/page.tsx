@@ -53,8 +53,6 @@ export default async function TripDetailsPage({ params }: Props) {
     }
   };
 
-  await new Promise((r) => setTimeout(r, 3000));
-
   return (
     <>
       <Link as={NextLink} href={"/"}>
