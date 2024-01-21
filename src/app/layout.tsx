@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { fonts } from "./fonts";
 import { Providers } from "./providers";
+import "remixicon/fonts/remixicon.css";
 
 export const metadata: Metadata = {
   title: "Chooose technical assessment",
