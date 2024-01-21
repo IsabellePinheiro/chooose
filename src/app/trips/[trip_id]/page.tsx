@@ -1,5 +1,6 @@
 import { getTripDetails } from "@/app/lib/api";
-import { AdvantageDetail } from "@/app/trips/[trip_id]/components/advantage-detail";
+import AboutCard from "@/app/trips/[trip_id]/components/about-card";
+import AdvantageDetail from "@/app/trips/[trip_id]/components/advantage-detail";
 import {
   Divider,
   Flex,
@@ -7,10 +8,8 @@ import {
   GridItem,
   Image,
   Link,
-  ListItem,
   SimpleGrid,
   Text,
-  UnorderedList,
 } from "@chakra-ui/react";
 import {
   RiEarthLine,
@@ -20,7 +19,6 @@ import {
   RiTeamLine,
 } from "@remixicon/react";
 import NextLink from "next/link";
-import pluralize from "pluralize";
 
 interface Props {
   params: {
@@ -29,7 +27,16 @@ interface Props {
 }
 
 export default async function TripDetailsPage({ params }: Props) {
-  const response = await getTripDetails(params.trip_id);
+  const {
+    advantages,
+    co2kilograms,
+    countries,
+    days,
+    description,
+    photoUrl,
+    subtitle,
+    title,
+  } = await getTripDetails(params.trip_id);
 
   const displayAdvantageIcon = (index: number) => {
     switch (index) {
@@ -46,16 +53,18 @@ export default async function TripDetailsPage({ params }: Props) {
     }
   };
 
+  await new Promise((r) => setTimeout(r, 3000));
+
   return (
     <>
       <Link as={NextLink} href={"/"}>
         Go back
       </Link>
-      <Flex direction="column" gap={2} mb={8}>
+      <Flex direction="column" gap={2} my={8}>
         <Text fontSize="3xl" as="b">
-          {response.title}
+          {title}
         </Text>
-        <Text color="gray.500">{response.subtitle}</Text>
+        <Text color="gray.500">{subtitle}</Text>
       </Flex>
       <Grid
         templateColumns={{ md: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
@@ -63,20 +72,18 @@ export default async function TripDetailsPage({ params }: Props) {
       >
         <GridItem colSpan={2} display="flex" flexDirection="column">
           <Flex direction="column" gap={8}>
-            <Flex direction="column" w="100%" px={4} gap={8}>
-              <Flex justifyContent="center">
-                <Image
-                  src={response.photoUrl}
-                  fallbackSrc="https://via.placeholder.com/450"
-                  alt={response.title}
-                  borderRadius={16}
-                />
-              </Flex>
+            <Flex direction="column" w="100%" gap={8}>
+              <Image
+                src={photoUrl}
+                fallbackSrc="https://via.placeholder.com/450"
+                alt={title}
+                borderRadius={16}
+              />
               <Text fontSize="xl" as="b">
                 Overview
               </Text>
               <SimpleGrid columns={{ md: 1, lg: 2 }} spacing="40px">
-                {response.advantages?.map((advantage, index) => (
+                {advantages?.map((advantage, index) => (
                   <AdvantageDetail
                     key={index}
                     icon={displayAdvantageIcon(index)}
@@ -87,7 +94,7 @@ export default async function TripDetailsPage({ params }: Props) {
               </SimpleGrid>
             </Flex>
             <Divider />
-            <Text>{response.description}</Text>
+            <Text>{description}</Text>
           </Flex>
         </GridItem>
 
@@ -98,29 +105,11 @@ export default async function TripDetailsPage({ params }: Props) {
           h="fit-content"
           borderRadius={16}
         >
-          <Flex gap={8} direction="column">
-            <Flex direction="column">
-              <Text as="b" fontSize="2xl">
-                {response.days} {pluralize("day", response.days)}
-              </Text>
-              <Text as="b" color="gray.500">
-                Emissions: {response.co2kilograms} kg CO2e
-              </Text>
-            </Flex>
-            <Divider />
-            <Flex direction="column" gap={2}>
-              <Text as="b" color="gray.500">
-                {pluralize("Country", response.countries.length)} included:
-              </Text>
-              <SimpleGrid columns={2} spacing="4px">
-                {response.countries.map((country) => (
-                  <UnorderedList key={country}>
-                    <ListItem>{country}</ListItem>
-                  </UnorderedList>
-                ))}
-              </SimpleGrid>
-            </Flex>
-          </Flex>
+          <AboutCard
+            days={days}
+            co2kilograms={co2kilograms}
+            countries={countries}
+          />
         </GridItem>
       </Grid>
     </>

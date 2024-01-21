@@ -7,7 +7,7 @@ interface Props {
   icon: ReactNode;
 }
 
-function AdvantageDetail({ title, description, icon }: Props) {
+export default function AdvantageDetail({ title, description, icon }: Props) {
   return (
     <Box display="flex" justifyContent="space-around" gap={4}>
       <Box mt={1}>{icon}</Box>
@@ -22,5 +22,3 @@ function AdvantageDetail({ title, description, icon }: Props) {
     </Box>
   );
 }
-
-export { AdvantageDetail };
