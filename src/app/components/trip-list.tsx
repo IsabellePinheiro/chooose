@@ -2,8 +2,8 @@
 
 import { getTripsAction } from "@/app/action";
 import { TripCard } from "@/app/components/trip-card";
-import { Trip } from "@/app/page";
-import { Box, Flex, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import { Trip } from "@/app/model";
+import { Box, Flex, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -24,21 +24,20 @@ export default function TripList({ initialTrips }: Props) {
     if (paginatedTrips.length) {
       setTrips((prev) => [...paginatedTrips, ...prev]);
       setCurrentPage(nextPage);
+      setIsLastPage(false);
     } else {
       setIsLastPage(true);
     }
-
-    // window.scrollTo(0, 0);
   };
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !isLastPage) {
       getMoreTrips();
     }
-  }, [inView]);
+  }, [inView, isLastPage]);
 
   return (
-    <Box>
+    <Box style={{ overflowAnchor: "none" }}>
       <SimpleGrid
         spacing={8}
         templateColumns="repeat(auto-fill, minmax(440px, 1fr))"
@@ -48,7 +47,9 @@ export default function TripList({ initialTrips }: Props) {
         ))}
       </SimpleGrid>
 
-      <Spinner ref={ref} />
+      <Flex w="100%" align="center" justify="center" py={8}>
+        {!isLastPage && <Spinner ref={ref} />}
+      </Flex>
     </Box>
   );
 }

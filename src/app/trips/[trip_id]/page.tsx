@@ -85,8 +85,7 @@ export default async function TripDetailsPage({ params }: Props) {
                   <AdvantageDetail
                     key={index}
                     icon={displayAdvantageIcon(index)}
-                    title={advantage.title}
-                    description={advantage.description}
+                    advantage={advantage}
                   />
                 ))}
               </SimpleGrid>

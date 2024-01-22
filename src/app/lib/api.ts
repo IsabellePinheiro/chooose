@@ -1,4 +1,4 @@
-import { Trip } from "@/app/page";
+import { Trip } from "@/app/model";
 
 export const BASE_URL = "https://chooose-api.vercel.app";
 
