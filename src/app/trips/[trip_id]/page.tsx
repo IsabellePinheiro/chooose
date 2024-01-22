@@ -68,7 +68,11 @@ export default async function TripDetailsPage({ params }: Props) {
         templateColumns={{ md: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
         gap={8}
       >
-        <GridItem colSpan={2} display="flex" flexDirection="column">
+        <GridItem
+          colSpan={{ md: 1, lg: 2 }}
+          display="flex"
+          flexDirection="column"
+        >
           <Flex direction="column" gap={8}>
             <Flex direction="column" w="100%" gap={8}>
               <Image
