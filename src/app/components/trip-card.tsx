@@ -1,6 +1,6 @@
 "use client";
 
-import { Trip } from "@/app/page";
+import { Trip } from "@/app/model";
 import {
   Button,
   Card,
