@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Overview
+
+Chooose technical assessment.
+
+![](chooose_gif.gif)
 
 ## Getting Started
 
-First, run the development server:
+Ensure you are using Node.js version 18 or higher. Use the following commands to download the required packages:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+Then,run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+This is a Next.js project bootstrapped with `create-next-app` and utilizes the following libraries:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Chakra UI](https://chakra-ui.com/) for UI components
+- [Json Server](https://github.com/typicode/json-server) to simulate a REST API
+- [Pluralize](https://github.com/plurals/pluralize) to keep a language consistency
+- [React Intersection Observer](https://github.com/thebuilder/react-intersection-observer) to create a fluid infinite scrolling
+- [React Simple Star Rating](https://github.com/awran5/react-simple-star-rating) to display the star rating as we have in the prototype
+- [Remix Icon](https://remixicon.com/) to add icons that are the most similar with what we have in the prototype
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+By default, Next.js automatically caches the returned values of fetch in the data cache on the server. This means that the data can be fetched at build time or request time, cached, and reused on each data request. That's the reason I didn't use any other cache tools in this project.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The project was deployed on Vercel and you can check out [the result here:](https://chooose-steel.vercel.app/)
